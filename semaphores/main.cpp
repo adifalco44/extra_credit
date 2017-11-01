@@ -4,18 +4,18 @@
 using namespace std;
 
 void *student(void *arg) {
-	Friends1 *student_goes = (Friends1 *) arg;
-	student_goes->person_goes();
+	Friends *student_in = (Friends *) arg;
+	student_in->go_inside();
 }
 
 int main() {
 	Thread threads[4];
-	Friends1 f;
+	Friends a;
 
-	threads[0].start(student, &f);
-	threads[1].start(student, &f);
-	threads[2].start(student, &f);
-	threads[3].start(student, &f);
+	threads[0].start(student, &a);
+	threads[1].start(student, &a);
+	threads[2].start(student, &a);
+	threads[3].start(student, &a);
 
 	threads[0].join(NULL);
 	threads[1].join(NULL);

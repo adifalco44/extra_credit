@@ -1,10 +1,9 @@
 #pragma once
 #define PTHREAD_CHECK(f) \
-        if ((rc = (f)) != 0) { \
-	    fprintf(stderr, "%s\n", strerror(rc)); \
-	    exit(EXIT_FAILURE); \
-        }
-
+	        if ((rc = (f)) != 0) { \
+		    fprintf(stderr, "%s\n", strerror(rc)); \
+	    	    exit(EXIT_FAILURE); \
+        	}
 
 #define Pthread_mutex_init(l, a) \
 	    PTHREAD_CHECK(pthread_mutex_init(l, a));

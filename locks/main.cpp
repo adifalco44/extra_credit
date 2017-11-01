@@ -1,7 +1,7 @@
-#include <iostream>
-#include "header.h"
 #include "thread.h"
 #include "macros.h"
+#include "header.h"
+#include <iostream>
 #include <pthread.h>
 using namespace std;
 
@@ -11,10 +11,10 @@ void *seller(void *arg);
 
 int main() {
 	Thread threads[2];
-	Bakery b;
+	Bakery a;
 
-	threads[0].start(baker, &b);
-	threads[1].start(seller, &b);
+	threads[0].start(baker, &a);
+	threads[1].start(seller, &a);
 
 	threads[0].join(NULL);
 	threads[1].join(NULL);
@@ -25,11 +25,11 @@ int main() {
 void *seller(void *arg) {
 	size_t cakes;
 	while (true) {
-		Bakery *seller = (Bakery *) arg;
+		Bakery *seller = (Bakery *)arg;
 		seller->sell();
 		cakes = seller->available();
-		cout << "Cakes sold: " << cakes << endl;
-		usleep(100000);
+		cout << "Number sold: " << cakes << endl;
+		usleep(99999);
 	}
 }
 
@@ -38,7 +38,7 @@ void *baker(void *arg) {
 		Bakery *baker = (Bakery *) arg;
 		baker->bake();
 		size_t cakes = baker->available();
-		cout << "Cakes baked: " << cakes << endl;
-		usleep(100000);
+		cout << "Number baked: " << cakes << endl;
+		usleep(99999);
 	}
 }

@@ -9,29 +9,29 @@
 using namespace std;
 size_t N = 4;
 
-class Friends1 {
+class Friends {
 	public:
-		Friends1() {
-		sem_init(&lock, 0, 1);
-		sem_init(&cond, 0, 0);
-		count = 0;
-}
+		Friends() {
+			sem_init(&lock, 0, 1);
+			sem_init(&go_in, 0, 0);
+			count = 0;
+	}
 
-void *person_goes() {
+void *go_inside() {
 	sem_wait(&lock);
 	count++;
 	int temp = count;
-	cout << "Friends that have arrived: " << count << endl;
+	cout << "Number of friends: " << count << endl;
 	sem_post(&lock);
 	if (temp < N) {
-		sem_wait(&cond);
+		sem_wait(&go_in);
 	}
-	sem_post(&cond);
+	sem_post(&go_in);
 }
 
 private:
 	sem_t lock;
-	sem_t cond;
+	sem_t go_in;
 	size_t count;
 };
 
